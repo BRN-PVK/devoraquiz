@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">942947342262-8rr56iepul861mlg8b3o99q81u72a3sq.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">942947342262</string>
+    <string name="google_api_key" translatable="false">AIzaSyBYA5YSMl1a_xe0OdNw6IKiuzcmQBGOar4</string>
+    <string name="google_app_id" translatable="false">1:942947342262:android:b4cab9b937490c23211317</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBYA5YSMl1a_xe0OdNw6IKiuzcmQBGOar4</string>
+    <string name="google_storage_bucket" translatable="false">devoraquiz-209ff.appspot.com</string>
+    <string name="project_id" translatable="false">devoraquiz-209ff</string>
+</resources>
