@@ -1,9 +1,11 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:devoraquiz/pages/questionsCarbs.dart';
 import 'package:devoraquiz/pages/quizzes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:devoraquiz/questionscarbo/carbo1.dart';
 
 class IntroCarbo extends StatefulWidget {
   const IntroCarbo({Key? key}) : super(key: key);
@@ -16,9 +18,12 @@ class _IntroCarboState extends State<IntroCarbo> {
   Start() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ListCarb()),
+      MaterialPageRoute(builder: (context) => carb_screen()),
     );
   }
+
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +57,31 @@ class _IntroCarboState extends State<IntroCarbo> {
                   ),
                 ),
                 Image.network(
-                  "https://cdn.pixabay.com/photo/2016/12/05/19/49/syringe-1884784_960_720.jpg",
+                  "https://s1.static.brasilescola.uol.com.br/be/2020/02/carboidratos.jpg",
                   fit: BoxFit.cover,
-                  height: 230,
+                  height: 210,
                   width: MediaQuery.of(context).size.width,
+                ),
+                SizedBox(height: 20),
+                Container(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 35,
+                    child: IconButton(
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.headphones,
+                      ),
+                      iconSize: 40,
+                      onPressed: () async {
+                        if (isPlaying) {
+                          await audioPlayer.pause();
+                        } else {
+                          await audioPlayer.play(
+                              'https://docs.google.com/uc?export=download&id=1yvr7rUUbuke253Dy0fSwOQR_qVNtrITn');
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Container(
@@ -134,8 +160,7 @@ class _IntroCarboState extends State<IntroCarbo> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10),
-
+                SizedBox(height: 20),
                 //* start button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),

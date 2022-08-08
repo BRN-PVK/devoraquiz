@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:devoraquiz/pages/questionsLipSat.dart';
 import 'package:devoraquiz/pages/quizzes.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,12 @@ class _IntroLipSatState extends State<IntroLipSat> {
   Start() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ListLipSat()),
+      MaterialPageRoute(builder: (context) => lipsat_screen()),
     );
   }
+
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +56,31 @@ class _IntroLipSatState extends State<IntroLipSat> {
                   ),
                 ),
                 Image.network(
-                  "https://cdn.pixabay.com/photo/2016/12/05/19/49/syringe-1884784_960_720.jpg",
+                  "https://www.dino.com.br/DinoImages/081f582b-3f86-4b07-ad03-e479cd052637.png?quality=100&width=620",
                   fit: BoxFit.cover,
                   height: 230,
                   width: MediaQuery.of(context).size.width,
+                ),
+                SizedBox(height: 20),
+                Container(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 35,
+                    child: IconButton(
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.headphones,
+                      ),
+                      iconSize: 40,
+                      onPressed: () async {
+                        if (isPlaying) {
+                          await audioPlayer.pause();
+                        } else {
+                          await audioPlayer.play(
+                              'https://docs.google.com/uc?export=download&id=1EhOBOXBeR7VZFSDX6Mh0X4-2rIPCVFLY');
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Container(
@@ -102,7 +127,7 @@ class _IntroLipSatState extends State<IntroLipSat> {
                         ],
                       ),
                       Text(
-                        "10 minutos",
+                        "X minutos",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],
@@ -127,7 +152,7 @@ class _IntroLipSatState extends State<IntroLipSat> {
                         ],
                       ),
                       Text(
-                        "Aaaaaaaaaaaaaaaa",
+                        "Presentes na gordura saturada, a qual se apresenta em forma sólida ou semi-sólida a temperatura ambiente. Está presente sobretudo em produtos de origem animal, mas também pode ser encontrado em alguns produtos vegetais. Existe uma grande variedade de ácidos graxos saturados, mas segundo a Sociedade Brasileira de Cardiologia, os que influenciam os níveis de colesterol são os de cadeia longa (acima de 14 átomos de carbono na cadeia).",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],

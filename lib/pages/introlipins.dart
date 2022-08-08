@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:devoraquiz/pages/questionsLipIns.dart';
 import 'package:devoraquiz/pages/quizzes.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,12 @@ class _IntroLipInsState extends State<IntroLipIns> {
   Start() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ListLipIns()),
+      MaterialPageRoute(builder: (context) => lipins_screen()),
     );
   }
+
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +56,31 @@ class _IntroLipInsState extends State<IntroLipIns> {
                   ),
                 ),
                 Image.network(
-                  "https://cdn.pixabay.com/photo/2016/12/05/19/49/syringe-1884784_960_720.jpg",
+                  "https://saude.abril.com.br/wp-content/uploads/2018/09/gordura-insaturada.png?quality=85&strip=info&resize=850,567",
                   fit: BoxFit.cover,
                   height: 230,
                   width: MediaQuery.of(context).size.width,
+                ),
+                SizedBox(height: 20),
+                Container(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 35,
+                    child: IconButton(
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.headphones,
+                      ),
+                      iconSize: 40,
+                      onPressed: () async {
+                        if (isPlaying) {
+                          await audioPlayer.pause();
+                        } else {
+                          await audioPlayer.play(
+                              'https://docs.google.com/uc?export=download&id=1t-kRIDmKqrhpYy0q7haULluHHgmedrU8');
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Container(
@@ -127,7 +152,7 @@ class _IntroLipInsState extends State<IntroLipIns> {
                         ],
                       ),
                       Text(
-                        "Aaaaaaaaaaaaaaaa",
+                        "Agora vamos falar de uma prima das gorduras saturadas: as gorduras insaturadas e poli-insaturadas.Este tipo de lipídio nos traz muitos benefícios e são as gorduras melhor aceitas pelo nosso organismo. Estão presentes em alimentos como abacate, castanhas, amendoim, azeite de oliva e alguns peixes. Mas, não se engane, não é porque faz bem que devemos exagerar!",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],

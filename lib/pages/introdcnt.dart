@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:devoraquiz/pages/questionsDCNTS.dart';
 import 'package:devoraquiz/pages/quizzes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +16,7 @@ class _IntroDCNTState extends State<IntroDCNT> {
   Start() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Carboidratos()),
+      MaterialPageRoute(builder: (context) => dcnts_screen()),
     );
   }
 
@@ -101,7 +102,7 @@ class _IntroDCNTState extends State<IntroDCNT> {
                         ],
                       ),
                       Text(
-                        "10 minutos",
+                        "X minutos",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],
@@ -126,7 +127,7 @@ class _IntroDCNTState extends State<IntroDCNT> {
                         ],
                       ),
                       Text(
-                        "Aaaaaaaaaaaaaaaa",
+                        "As doenças crônicas não transmissíveis – DCNT (doenças cardiovasculares, câncer, diabetes e doenças respiratórias crônicas) representam um dos principais desafios de saúde pública, tanto pela alta prevalência como pela rapidez com que adquiriram destaque como principais causas de morte no Brasil e no mundo.",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],

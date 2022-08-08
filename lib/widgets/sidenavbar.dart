@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_declarations, unused_local_variable, avoid_unnecessary_containers, prefer_const_constructors
 
-import 'package:devoraquiz/auth/main_page.dart';
+import 'package:devoraquiz/pages/homepage.dart';
 import 'package:devoraquiz/pages/introcarbo.dart';
 import 'package:devoraquiz/pages/introdcnt.dart';
 import 'package:devoraquiz/pages/introlipins.dart';
 import 'package:devoraquiz/pages/introlipsat.dart';
-import 'package:devoraquiz/pages/questionsCarbs.dart';
-import 'package:devoraquiz/pages/questionsLipIns.dart';
-import 'package:devoraquiz/pages/questionsLipSat.dart';
+import 'package:devoraquiz/pages/logout.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -89,14 +87,14 @@ class _SideNavState extends State<SideNav> {
             listItem(
               context: context,
               path: MaterialPageRoute(
-                  builder: (BuildContext context) => IntroDCNT()),
+                  builder: (BuildContext context) => HomePage()),
               label: "Sobre nós",
               icon: Icons.business_rounded,
             ),
             listItem(
               context: context,
               path: MaterialPageRoute(
-                  builder: (BuildContext context) => MainPage()),
+                  builder: (BuildContext context) => logout()),
               label: "Deslogar",
               icon: Icons.logout_rounded,
             ),
@@ -123,7 +121,6 @@ class _SideNavState extends State<SideNav> {
         hoverColor: hovercolor,
         title: Text(label, style: TextStyle(color: color)),
         onTap: () async {
-          await signOut();
           Navigator.pushReplacement(context, path);
         });
   }

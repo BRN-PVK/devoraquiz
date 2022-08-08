@@ -1,7 +1,6 @@
-import 'package:devoraquiz/pages/homepage.dart';
-import 'package:devoraquiz/pages/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:devoraquiz/pages/homepage.dart';
 import '../pages/userScreen.dart';
 import '../pages/quizzes.dart';
 import '../pages/loginScreen.dart';

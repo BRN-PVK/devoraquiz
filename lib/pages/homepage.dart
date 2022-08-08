@@ -3,6 +3,7 @@
 import 'package:devoraquiz/pages/introdcnt.dart';
 import 'package:devoraquiz/pages/quizzes.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (context) => IntroDCNT()),
     );
   }
+
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,27 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 52,
                   ),
                 ),
-                SizedBox(height: 25),
+                Container(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 35,
+                    child: IconButton(
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.headphones,
+                      ),
+                      iconSize: 40,
+                      onPressed: () async {
+                        if (isPlaying) {
+                          await audioPlayer.pause();
+                        } else {
+                          await audioPlayer.play(
+                              'https://docs.google.com/uc?export=download&id=1iGzMmtByJmfsWGSWd_UlNMRMBIg8Rmdu');
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Text(
@@ -82,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          'COMEÇAR',
+                          'CONTINUAR',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

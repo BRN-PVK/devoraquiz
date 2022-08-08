@@ -25,7 +25,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
   final _zoneController = TextEditingController();
-
+  final _scoreController = TextEditingController();
   final edulvlValue = ValueNotifier('');
   final edulvlOptions = [
     'Superior completo',
@@ -110,13 +110,18 @@ class _SignupScreenState extends State<SignupScreen> {
     String escolaridade,
     String genero,
   ) async {
-    await FirebaseFirestore.instance.collection('users').add({
+    User? user = FirebaseAuth.instance.currentUser;
+    await FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
       'nome': nome,
       'email': email,
       'idade': idade,
       'regiao': regiao,
       'escolaridade': escolaridade,
       'genero': genero,
+      'scoredcnt': '0',
+      'scorecarb': '0',
+      'scorelipsat': '0',
+      'scorelipins': '0',
     });
   }
 

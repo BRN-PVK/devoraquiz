@@ -1,9 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:devoraquiz/questions/dcnt1.dart';
 import 'package:devoraquiz/pages/questionsCarbs.dart';
+import 'package:devoraquiz/pages/questionsDCNTS.dart';
 import 'package:devoraquiz/pages/questionsLipIns.dart';
 import 'package:devoraquiz/pages/questionsLipSat.dart';
+import 'package:devoraquiz/questionscarbo/carbo1.dart';
 
 // Questionário de Carboidratos
 class Carboidratos extends StatefulWidget {
@@ -99,7 +104,7 @@ class _CarboidratosState extends State<Carboidratos> {
             _audioCache.play('pop_sound.mp3');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Carbos()),
+              MaterialPageRoute(builder: (context) => CARBO1()),
             );
           },
         ),
@@ -201,7 +206,7 @@ class _LipideosSatState extends State<LipideosSat> {
             _audioCache.play('pop_sound.mp3');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LipSat()),
+              MaterialPageRoute(builder: (context) => lipsat_screen()),
             );
           },
         ),
@@ -303,7 +308,107 @@ class _LipideosInsState extends State<LipideosIns> {
             _audioCache.play('pop_sound.mp3');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LipIns()),
+              MaterialPageRoute(builder: (context) => lipins_screen()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class dcnts extends StatefulWidget {
+  @override
+  State<LipideosIns> createState() => _LipideosInsState();
+}
+
+class _dcntsInsState extends State<LipideosIns> {
+  // Manipular áudio
+
+  late final AudioCache _audioCache;
+
+  @override
+  void initState() {
+    super.initState();
+    _audioCache = AudioCache(
+      prefix: 'assets/audio/',
+      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+    );
+  }
+
+  var dcntstext = 'Doenças Crônicas não Transmissíveis';
+
+  var titlesize = 30.0;
+
+  var textfontsize = 24.0;
+
+  var intro =
+      'Agora vamos falar de uma prima das gorduras saturadas: as gorduras insaturadas e poli-insaturadas. Este tipo de lipídio nos traz muitos benefícios e são as gorduras melhor aceitas pelo nosso organismo. Estão presentes em alimentos como abacate, castanhas, amendoim, azeite de oliva e alguns peixes. Mas, não se engane, não é porque faz bem que devemos exagerar! Vamos descobrir um pouco mais onde os lipídios estão na nossa alimentação e quais deles são preferíveis para mantermos um equilíbrio alimentar?';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Questionários',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: Scaffold(
+        drawer: sidebar(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            dcntstext,
+            style: TextStyle(
+              fontSize: titlesize,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Text(
+                    intro,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: textfontsize,
+                    ),
+                  ),
+                ),
+                elevatedButton(context),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget elevatedButton(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 30.0),
+        child: ElevatedButton.icon(
+          label: const Text('Responder'),
+          icon: const Icon(CupertinoIcons.play_arrow),
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(240, 80),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () {
+            _audioCache.play('pop_sound.mp3');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => dcnts_screen()),
             );
           },
         ),
@@ -317,6 +422,7 @@ class sidebar extends StatelessWidget {
   var carbotext = 'Carboidratos';
   var lipsattext = 'Lipídeos Saturados';
   var lipinstext = 'Lipídeos Insaturados';
+  var dcntstext = 'Doenças Crônicas não Transmissíveis';
   var titlesize = 25.0;
 
   @override
@@ -365,6 +471,16 @@ class sidebar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LipideosIns()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.list_outlined),
+            title: Text(dcntstext),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => dcnts()),
               );
             },
           ),
